@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class BestCharge {
 	public static void main(String[] args) {
 		final Item[] ITEMS = LoadInfo.loadAllItems();
@@ -13,3 +15,4 @@ public class BestCharge {
 		System.out.print("请点单(输入样例: 菜品*数量，菜品*数量), 输入完成请回车：");
 	}
 }
+
