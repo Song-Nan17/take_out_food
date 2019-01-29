@@ -9,14 +9,17 @@ public class BestCharge {
 			printMenu(ITEMS);
 			Scanner in = new Scanner(System.in);
 			Order[] orders = getOrders(in.nextLine(), ITEMS);
-//			test
-			System.out.println(orders.length);
-			for(Order k :orders) {
-				if(k==null) {
-					continue;
-				}
-				System.out.println("id:"+k.getId() +",name:" +k.getName() +",quantity:" +k.getQuantity() +", unitPrice:" +k.getUnitPrice()+", totalPrice:" +k.getTotalPrice());
+			if (isAllNull(orders)) {
+				continue;
 			}
+//			test
+//			System.out.println(orders.length);
+//			for (Order k : orders) {
+//				if (k == null) {
+//					continue;
+//				}
+//				System.out.println("id:" + k.getId() + ",name:" + k.getName() + ",quantity:" + k.getQuantity() + ", unitPrice:" + k.getUnitPrice() + ", totalPrice:" + k.getTotalPrice());
+//			}
 		}
 	}
 
@@ -41,7 +44,7 @@ public class BestCharge {
 				try {
 					orders[orderNum] = getOrder(name, quantity, items);
 					orderNum++;
-					System.out.println("orderNum:" +orderNum +",数组长度："+orders.length);
+					System.out.println("orderNum:" + orderNum + ",数组长度：" + orders.length);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("getOrders中数组orders越界异常：" + e);
 				}
@@ -67,7 +70,7 @@ public class BestCharge {
 	}
 
 	public static Order getOrder(String name, int quantity, Item[] items) {
-		Order order = new Order("",name,quantity,0.00);
+		Order order = new Order("", name, quantity, 0.00);
 		for (Item item : items) {
 			if (name.equals(item.getName())) {
 				String id = item.getId();
@@ -77,6 +80,17 @@ public class BestCharge {
 			}
 		}
 		return order;
+	}
+
+	public static boolean isAllNull(Order[] orders) {
+		boolean isAllNull = true;
+		for (Order order : orders) {
+			if (order != null) {
+				isAllNull = false;
+				break;
+			}
+		}
+		return isAllNull;
 	}
 
 }
