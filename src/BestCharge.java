@@ -13,7 +13,8 @@ public class BestCharge {
 			for (Order k : orders) {
 				System.out.println(k);
 			}
-			if (isAllNull(orders)) {
+			if (orders.length==0) {
+				System.out.println("订单无效");
 				continue;
 			}
 //			test
@@ -104,17 +105,6 @@ public class BestCharge {
 			}
 //		}
 		return realOrders;
-	}
-
-	public static boolean isAllNull(Order[] orders) {
-		boolean isAllNull = true;
-		for (Order order : orders) {
-			if (order != null) {
-				isAllNull = false;
-				break;
-			}
-		}
-		return isAllNull;
 	}
 
 //	public static double computeTotalPriceWithNoPromotion(Order[] orders) {
