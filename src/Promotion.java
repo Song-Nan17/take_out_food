@@ -1,6 +1,6 @@
 public class Promotion {
 	private String type;
-	private String[] items;
+	private String[] items,discountItems;
 	private double discount;
 
 	public Promotion(String type, String[] items) {
@@ -22,5 +22,13 @@ public class Promotion {
 
 	public double getDiscount() {
 		return discount;
+	}
+
+	public void  setDiscountItems(String[] discountItems) {
+		this.discountItems = discountItems;
+	}
+
+	public String[] getDiscountItems() {
+		return discountItems;
 	}
 }
