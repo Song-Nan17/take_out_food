@@ -1,5 +1,3 @@
-import com.sun.deploy.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,19 +6,12 @@ import java.util.regex.Pattern;
 
 public class BestCharge {
 	public static void main(String[] args) {
-//		String[] arr = {"asd", "asd", null};
-//		String str = String.join("，", arr);
-//		System.out.println(str);
 
 		final Item[] ITEMS = LoadInfo.loadAllItems();
 		while (true) {
 			printMenu(ITEMS);
 			Scanner in = new Scanner(System.in);
 			Order[] orders = getOrders(in.nextLine(), ITEMS);
-			System.out.println(orders.length);
-			for (Order k : orders) {
-				System.out.println(k);
-			}
 			if (orders.length == 0) {
 				System.out.println("订餐无效，请重新点餐：");
 				continue;
@@ -28,25 +19,15 @@ public class BestCharge {
 			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
 			Promotion promotion = choosePromotion(orders, totalPriceWithNoPromotion);
 			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion, promotion);
-//			System.out.println("总价：" + totalPrice);
-//			System.out.println("");
 			printBill(orders, promotion, totalPrice);
 			System.out.println("订餐成功！\n可继续点餐：\n");
-//			System.out.println(promotion.getType());
-//			System.out.println(promotion.getDiscount());
-//			System.out.println(totalPriceWithNoPromotion);
-//			test
-//			System.out.println(orders.length);
-//			for (Order k : orders) {
-//				System.out.println("id:" + k.getId() + ",name:" + k.getName() + ",quantity:" + k.getCount() + ", unitPrice:" + k.getUnitPrice() + ", totalPrice:" + k.getTotalPrice());
-//			}
 		}
 	}
 
 	public static void printMenu(Item[] items) {
 		String menu = "============== 菜  单 ==============\n" + "菜品\t\t\t\t\t\t\t价格/元\n";
 		for (Item k : items) {
-			menu += k.getName() + "\t\t\t\t\t\t\t" + String.format("%.2f", k.getPrice()) + "\n";
+			menu += k.getName() + "\t\t\t\t\t\t\t" + String.format("%.2f", k.getPrice());
 		}
 		menu += "\n===================================";
 		System.out.println(menu);
@@ -65,7 +46,6 @@ public class BestCharge {
 				try {
 					orders[orderNum] = getOrder(name, count, items);
 					orderNum++;
-//					System.out.println("orderNum:" + orderNum + ",数组长度：" + orders.length);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("getOrders中数组orders越界异常：" + e);
 				}
