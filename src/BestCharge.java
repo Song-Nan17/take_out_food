@@ -1,19 +1,28 @@
 import com.sun.deploy.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class BestCharge {
 	public static void main(String[] args) {
-		String[] arr = {"asd", "asd", null};
-		String str = String.join("，", arr);
-		System.out.println(str);
+//		String[] arr = {"asd", "asd", null};
+//		String str = String.join("，", arr);
+//		System.out.println(str);
+
 		final Item[] ITEMS = LoadInfo.loadAllItems();
 		while (true) {
 			printMenu(ITEMS);
 			Scanner in = new Scanner(System.in);
 			Order[] orders = getOrders(in.nextLine(), ITEMS);
+			Promotion[] promotions = LoadInfo.loadPromotions();
+			Promotion half = computeHalfOff(orders, promotions[1]);
+			System.out.println("折扣：" + half.getDiscount());
+			String[] arr = half.getDiscountItems();
+			String str = String.join("，", arr);
+			System.out.println("折扣商品：" + str);
 			System.out.println(orders.length);
 			for (Order k : orders) {
 				System.out.println(k);
@@ -22,7 +31,7 @@ public class BestCharge {
 				System.out.println("订单无效");
 				continue;
 			}
-//			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
+			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
 //			System.out.println(totalPriceWithNoPromotion);
 //			test
 //			System.out.println(orders.length);
@@ -137,17 +146,22 @@ public class BestCharge {
 		moneyOff.setDiscount(discount);
 		return moneyOff;
 	}
+
 	public static Promotion computeHalfOff(Order[] orders, Promotion promotion) {
 		Promotion halfOff = promotion;
-		String[] promotionItems = new String[0]
+		List<String> stringList = new ArrayList();
 		double discount = 0;
-		for(Order order :orders) {
-			if(Arrays.asList(promotion.getItems()).contains(order.getId())){
-				discount+=order.getTotalPrice()*0.5;
-				Arrays.asList(promotionItems).add(order.getName());
+		for (Order order : orders) {
+			if (Arrays.asList(promotion.getItems()).contains(order.getId())) {
+				discount += order.getTotalPrice() * 0.5;
+				stringList.add(order.getName());
 			}
 		}
 		halfOff.setDiscount(discount);
+		String[] discountItems = new String[stringList.size()];
+		stringList.toArray(discountItems);
+		halfOff.setDiscountItems(discountItems);
+		return halfOff;
 	}
 
 }
