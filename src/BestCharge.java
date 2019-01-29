@@ -137,7 +137,18 @@ public class BestCharge {
 		moneyOff.setDiscount(discount);
 		return moneyOff;
 	}
-//	public static Promotion computeHalfOff(Order[] orders, )
+	public static Promotion computeHalfOff(Order[] orders, Promotion promotion) {
+		Promotion halfOff = promotion;
+		String[] promotionItems = new String[0]
+		double discount = 0;
+		for(Order order :orders) {
+			if(Arrays.asList(promotion.getItems()).contains(order.getId())){
+				discount+=order.getTotalPrice()*0.5;
+				Arrays.asList(promotionItems).add(order.getName());
+			}
+		}
+		halfOff.setDiscount(discount);
+	}
 
 }
 
