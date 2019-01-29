@@ -25,9 +25,9 @@ public class BestCharge {
 	}
 
 	public static void printMenu(Item[] items) {
-		String menu = "============== 菜  单 ==============\n" + "菜品\t\t\t\t\t\t\t价格/元\n";
+		String menu = "============== 菜  单 ==============\n" + "菜品\t\t\t价格/元\n";
 		for (Item k : items) {
-			menu += k.getName() + "\t\t\t\t\t\t\t" + String.format("%.2f", k.getPrice()) + "\n";
+			menu += k.getName() + "\t\t\t" + String.format("%.2f", k.getPrice()) + "\n";
 		}
 		menu += "===================================";
 		System.out.println(menu);
@@ -163,4 +163,3 @@ public class BestCharge {
 		return promotionList;
 	}
 }
-
