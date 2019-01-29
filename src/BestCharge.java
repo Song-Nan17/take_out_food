@@ -162,5 +162,5 @@ public class BestCharge {
 		}
 		return promotionList;
 	}
-	
+
 }
