@@ -29,6 +29,7 @@ public class BestCharge {
 			Promotion promotion = choosePromotion(orders, totalPriceWithNoPromotion);
 			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion, promotion);
 			System.out.println("总价：" + totalPrice);
+			printBill(orders,promotion,totalPrice);
 //			System.out.println(promotion.getType());
 //			System.out.println(promotion.getDiscount());
 //			System.out.println(totalPriceWithNoPromotion);
@@ -174,7 +175,17 @@ public class BestCharge {
 	}
 
 	public static void printBill(Order[] orders, Promotion promotion, double totalPrice) {
-		
+		String itemsList = generateItemsList(orders);
+		System.out.println(itemsList);
+
+	}
+
+	public static String generateItemsList(Order[] orders) {
+		String[] itemsList = new String[orders.length];
+		for(int i=0;i<orders.length;i++) {
+			itemsList[i]=orders[i].getName()+" x "+orders[i].getCount()+" = "+String.format("%.2f",orders[i].getTotalPrice())+" 元";
+		}
+		return String.join("\n", itemsList);
 	}
 }
 
