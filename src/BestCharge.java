@@ -178,7 +178,10 @@ public class BestCharge {
 	public static void printBill(Order[] orders, Promotion promotion, double totalPrice) {
 		String itemsList = generateItemsList(orders);
 		String promotionList = generatePromotionList(promotion);
-		System.out.println(itemsList+"\n"+promotionList);
+		String bill = "============= 订餐明细 =============\n"+itemsList+"\n"+promotionList;
+		bill+="\n"+"总计："+String.format("%.2f",totalPrice)+"元";
+		bill+="\n===================================";
+		System.out.println(bill);
 
 	}
 
