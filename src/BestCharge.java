@@ -29,7 +29,8 @@ public class BestCharge {
 			Promotion promotion = choosePromotion(orders, totalPriceWithNoPromotion);
 			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion, promotion);
 			System.out.println("总价：" + totalPrice);
-			printBill(orders,promotion,totalPrice);
+			System.out.println("");
+			printBill(orders, promotion, totalPrice);
 //			System.out.println(promotion.getType());
 //			System.out.println(promotion.getDiscount());
 //			System.out.println(totalPriceWithNoPromotion);
@@ -176,16 +177,29 @@ public class BestCharge {
 
 	public static void printBill(Order[] orders, Promotion promotion, double totalPrice) {
 		String itemsList = generateItemsList(orders);
-		System.out.println(itemsList);
+		String promotionList = generatePromotionList(promotion);
+		System.out.println(itemsList+"\n"+promotionList);
 
 	}
 
 	public static String generateItemsList(Order[] orders) {
 		String[] itemsList = new String[orders.length];
-		for(int i=0;i<orders.length;i++) {
-			itemsList[i]=orders[i].getName()+" x "+orders[i].getCount()+" = "+String.format("%.2f",orders[i].getTotalPrice())+" 元";
+		for (int i = 0; i < orders.length; i++) {
+			itemsList[i] = orders[i].getName() + " x " + orders[i].getCount() + " = " + String.format("%.2f", orders[i].getTotalPrice()) + " 元";
 		}
 		return String.join("\n", itemsList);
+	}
+
+	public static String generatePromotionList(Promotion promotion) {
+		String promotionList = "-----------------------------------";
+		if (promotion.getDiscount() != 0) {
+			promotionList += "\n使用优惠：";
+			promotionList += "\n" + promotion.getType();
+			promotionList += promotion.getType().equals("满30减6元") ?"，":"(" + String.join("，", promotion.getDiscountItems()) + ")，" ;
+			promotionList+="省"+String.format("%.2f",promotion.getDiscount())+"元";
+			promotionList+="\n-----------------------------------";
+		}
+		return promotionList;
 	}
 }
 
