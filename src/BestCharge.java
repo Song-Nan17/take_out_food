@@ -13,7 +13,7 @@ public class BestCharge {
 			for (Order k : orders) {
 				System.out.println(k);
 			}
-			if (orders.length==0) {
+			if (orders.length == 0) {
 				System.out.println("订单无效");
 				continue;
 			}
@@ -99,27 +99,27 @@ public class BestCharge {
 		}
 		Order[] realOrders = new Order[isNotNull];
 //		if (isNotNull != 0) {
-			for (int i = 0, j = 0; i < orders.length; i++) {
-				if (orders[i] != null) {
-					realOrders[j] = orders[i];
-					j++;
-				}
+		for (int i = 0, j = 0; i < orders.length; i++) {
+			if (orders[i] != null) {
+				realOrders[j] = orders[i];
+				j++;
 			}
+		}
 //		}
 		return realOrders;
 	}
 
 	public static double computeTotalPriceWithNoPromotion(Order[] orders) {
 		double totalPrice = 0.00;
-		for(Order order:orders) {
-			totalPrice+=order.getTotalPrice();
+		for (Order order : orders) {
+			totalPrice += order.getTotalPrice();
 		}
 		return totalPrice;
 	}
-	public static Promotion choosePromotion(Order[] orders,double totalPriceWithNoPromotion){
-		Promotion[] promotions = LoadInfo.loadPromotions();
-		
-	}
+
+//	public static Promotion choosePromotion(Order[] orders, double totalPriceWithNoPromotion) {
+//		Promotion[] promotions = LoadInfo.loadPromotions();
+//	}
 
 }
 
