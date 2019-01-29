@@ -1,9 +1,14 @@
+import com.sun.deploy.util.StringUtils;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class BestCharge {
 	public static void main(String[] args) {
+		String[] arr = {"asd", "asd", null};
+		String str = String.join("，", arr);
+		System.out.println(str);
 		final Item[] ITEMS = LoadInfo.loadAllItems();
 		while (true) {
 			printMenu(ITEMS);
@@ -119,12 +124,12 @@ public class BestCharge {
 
 	public static Promotion choosePromotion(Order[] orders, double totalPriceWithNoPromotion) {
 		Promotion[] promotions = LoadInfo.loadPromotions();
-		Promotion moneyOff = computeMoneyOff(totalPriceWithNoPromotion,promotions);
+		Promotion moneyOff = computeMoneyOff(totalPriceWithNoPromotion, promotions[0]);
 		return moneyOff;
 	}
 
-	public static Promotion computeMoneyOff(double totalPriceWithNoPromotion, Promotion[] promotions) {
-		Promotion moneyOff = promotions[0];
+	public static Promotion computeMoneyOff(double totalPriceWithNoPromotion, Promotion promotion) {
+		Promotion moneyOff = promotion;
 		double discount = 0;
 		if (totalPriceWithNoPromotion >= 30) {
 			discount = 6;
@@ -132,5 +137,7 @@ public class BestCharge {
 		moneyOff.setDiscount(discount);
 		return moneyOff;
 	}
+//	public static Promotion computeHalfOff(Order[] orders, )
+
 }
 
