@@ -116,6 +116,10 @@ public class BestCharge {
 		}
 		return totalPrice;
 	}
+	public static Promotion choosePromotion(Order[] orders,double totalPriceWithNoPromotion){
+		Promotion[] promotions = LoadInfo.loadPromotions();
+		
+	}
 
 }
 
