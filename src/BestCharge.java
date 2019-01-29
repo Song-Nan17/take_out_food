@@ -27,8 +27,8 @@ public class BestCharge {
 			}
 			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
 			Promotion promotion = choosePromotion(orders, totalPriceWithNoPromotion);
-			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion,promotion);
-			System.out.println("总价："+totalPrice);
+			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion, promotion);
+			System.out.println("总价：" + totalPrice);
 //			System.out.println(promotion.getType());
 //			System.out.println(promotion.getDiscount());
 //			System.out.println(totalPriceWithNoPromotion);
@@ -171,6 +171,10 @@ public class BestCharge {
 
 	public static double computeTotalPrice(double totalPriceWithNoPromotion, Promotion promotion) {
 		return totalPriceWithNoPromotion - promotion.getDiscount();
+	}
+
+	public static void printBill(Order[] orders, Promotion promotion, double totalPrice) {
+		
 	}
 }
 
