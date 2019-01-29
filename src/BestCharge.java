@@ -9,6 +9,10 @@ public class BestCharge {
 			printMenu(ITEMS);
 			Scanner in = new Scanner(System.in);
 			Order[] orders = getOrders(in.nextLine(), ITEMS);
+			System.out.println(orders.length);
+			for (Order k : orders) {
+				System.out.println(k);
+			}
 			if (isAllNull(orders)) {
 				continue;
 			}
@@ -44,13 +48,14 @@ public class BestCharge {
 				try {
 					orders[orderNum] = getOrder(name, quantity, items);
 					orderNum++;
-					System.out.println("orderNum:" + orderNum + ",数组长度：" + orders.length);
+//					System.out.println("orderNum:" + orderNum + ",数组长度：" + orders.length);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("getOrders中数组orders越界异常：" + e);
 				}
 			}
 		}
-		return orders;
+		Order[] realOrders = deleteNull(orders);
+		return realOrders;
 	}
 
 	public static boolean isInteger(String str) {
@@ -82,6 +87,25 @@ public class BestCharge {
 		return order;
 	}
 
+	public static Order[] deleteNull(Order[] orders) {
+		int isNotNull = 0;
+		for (Order order : orders) {
+			if (order != null) {
+				isNotNull++;
+			}
+		}
+		Order[] realOrders = new Order[isNotNull];
+//		if (isNotNull != 0) {
+			for (int i = 0, j = 0; i < orders.length; i++) {
+				if (orders[i] != null) {
+					realOrders[j] = orders[i];
+					j++;
+				}
+			}
+//		}
+		return realOrders;
+	}
+
 	public static boolean isAllNull(Order[] orders) {
 		boolean isAllNull = true;
 		for (Order order : orders) {
@@ -92,6 +116,13 @@ public class BestCharge {
 		}
 		return isAllNull;
 	}
+
+//	public static double computeTotalPriceWithNoPromotion(Order[] orders) {
+//		double totalPrice = 0.00;
+//		for(Order order:orders) {
+//			if()
+//		}
+//	}
 
 }
 
