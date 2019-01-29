@@ -36,23 +36,18 @@ public class BestCharge {
 
 	public static Order[] getOrders(String input, Item[] items) {
 		String[] inputs = input.split("，");
-		int orderNum = 0;
-		Order[] orders = new Order[inputs.length];
+		List<Order> orderList = new ArrayList();
 		for (String str : inputs) {
-			String[] arr = str.split("\\*");
-			String name = arr[0];
+			String[] strArr = str.split("\\*");
+			String name = strArr[0];
 			if (isInItems(name, items)) {
-				int count = arr.length > 1 && isInteger(arr[1]) ? Integer.parseInt(arr[1]) : 1;
-				try {
-					orders[orderNum] = getOrder(name, count, items);
-					orderNum++;
-				} catch (ArrayIndexOutOfBoundsException e) {
-					System.out.println("getOrders中数组orders越界异常：" + e);
-				}
+				int count = strArr.length > 1 && isInteger(strArr[1]) ? Integer.parseInt(strArr[1]) : 1;
+				orderList.add(getOrder(name, count, items));
 			}
 		}
-		Order[] realOrders = deleteNull(orders);
-		return realOrders;
+		Order[] orders = new Order[orderList.size()];
+		orderList.toArray(orders);
+		return orders;
 	}
 
 	public static boolean isInteger(String str) {
