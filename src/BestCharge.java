@@ -177,7 +177,7 @@ public class BestCharge {
 			promotionList += "\n" + promotion.getType();
 			promotionList += promotion.getType().equals("满30减6元") ? "，" : "(" + String.join("，", promotion.getDiscountItems()) + ")，";
 			promotionList += "省" + String.format("%.2f", promotion.getDiscount()) + "元";
-			promotionList += "-----------------------------------";
+			promotionList += "\n-----------------------------------";
 		}
 		return promotionList;
 	}
