@@ -17,12 +17,6 @@ public class BestCharge {
 			printMenu(ITEMS);
 			Scanner in = new Scanner(System.in);
 			Order[] orders = getOrders(in.nextLine(), ITEMS);
-			Promotion[] promotions = LoadInfo.loadPromotions();
-			Promotion half = computeHalfOff(orders, promotions[1]);
-			System.out.println("折扣：" + half.getDiscount());
-			String[] arr = half.getDiscountItems();
-			String str = String.join("，", arr);
-			System.out.println("折扣商品：" + str);
 			System.out.println(orders.length);
 			for (Order k : orders) {
 				System.out.println(k);
@@ -32,6 +26,9 @@ public class BestCharge {
 				continue;
 			}
 			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
+			Promotion promotion = choosePromotion(orders,totalPriceWithNoPromotion);
+//			System.out.println(promotion.getType());
+//			System.out.println(promotion.getDiscount());
 //			System.out.println(totalPriceWithNoPromotion);
 //			test
 //			System.out.println(orders.length);
@@ -134,7 +131,8 @@ public class BestCharge {
 	public static Promotion choosePromotion(Order[] orders, double totalPriceWithNoPromotion) {
 		Promotion[] promotions = LoadInfo.loadPromotions();
 		Promotion moneyOff = computeMoneyOff(totalPriceWithNoPromotion, promotions[0]);
-		return moneyOff;
+		Promotion halfOff = computeHalfOff(orders,promotions[1]);
+		return comparePromotions(moneyOff,halfOff);
 	}
 
 	public static Promotion computeMoneyOff(double totalPriceWithNoPromotion, Promotion promotion) {
@@ -164,5 +162,12 @@ public class BestCharge {
 		return halfOff;
 	}
 
+	public static Promotion comparePromotions(Promotion moneyOff,Promotion halfOff) {
+		Promotion promotion=moneyOff;
+		if(moneyOff.getDiscount()<halfOff.getDiscount()) {
+			promotion=halfOff;
+		}
+		return promotion;
+	}
 }
 
