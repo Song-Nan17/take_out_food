@@ -26,7 +26,9 @@ public class BestCharge {
 				continue;
 			}
 			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
-			Promotion promotion = choosePromotion(orders,totalPriceWithNoPromotion);
+			Promotion promotion = choosePromotion(orders, totalPriceWithNoPromotion);
+			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion,promotion);
+			System.out.println("总价："+totalPrice);
 //			System.out.println(promotion.getType());
 //			System.out.println(promotion.getDiscount());
 //			System.out.println(totalPriceWithNoPromotion);
@@ -128,8 +130,8 @@ public class BestCharge {
 	public static Promotion choosePromotion(Order[] orders, double totalPriceWithNoPromotion) {
 		Promotion[] promotions = LoadInfo.loadPromotions();
 		Promotion moneyOff = computeMoneyOff(totalPriceWithNoPromotion, promotions[0]);
-		Promotion halfOff = computeHalfOff(orders,promotions[1]);
-		return comparePromotions(moneyOff,halfOff);
+		Promotion halfOff = computeHalfOff(orders, promotions[1]);
+		return comparePromotions(moneyOff, halfOff);
 	}
 
 	public static Promotion computeMoneyOff(double totalPriceWithNoPromotion, Promotion promotion) {
@@ -159,12 +161,16 @@ public class BestCharge {
 		return halfOff;
 	}
 
-	public static Promotion comparePromotions(Promotion moneyOff,Promotion halfOff) {
-		Promotion promotion=moneyOff;
-		if(moneyOff.getDiscount()<halfOff.getDiscount()) {
-			promotion=halfOff;
+	public static Promotion comparePromotions(Promotion moneyOff, Promotion halfOff) {
+		Promotion promotion = moneyOff;
+		if (moneyOff.getDiscount() < halfOff.getDiscount()) {
+			promotion = halfOff;
 		}
 		return promotion;
+	}
+
+	public static double computeTotalPrice(double totalPriceWithNoPromotion, Promotion promotion) {
+		return totalPriceWithNoPromotion - promotion.getDiscount();
 	}
 }
 
