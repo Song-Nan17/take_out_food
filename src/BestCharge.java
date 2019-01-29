@@ -17,8 +17,8 @@ public class BestCharge {
 				System.out.println("订单无效");
 				continue;
 			}
-			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
-			System.out.println(totalPriceWithNoPromotion);
+//			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
+//			System.out.println(totalPriceWithNoPromotion);
 //			test
 //			System.out.println(orders.length);
 //			for (Order k : orders) {
@@ -117,9 +117,20 @@ public class BestCharge {
 		return totalPrice;
 	}
 
-//	public static Promotion choosePromotion(Order[] orders, double totalPriceWithNoPromotion) {
-//		Promotion[] promotions = LoadInfo.loadPromotions();
-//	}
+	public static Promotion choosePromotion(Order[] orders, double totalPriceWithNoPromotion) {
+		Promotion[] promotions = LoadInfo.loadPromotions();
+		Promotion moneyOff = computeMoneyOff(totalPriceWithNoPromotion,promotions);
+		return moneyOff;
+	}
 
+	public static Promotion computeMoneyOff(double totalPriceWithNoPromotion, Promotion[] promotions) {
+		Promotion moneyOff = promotions[0];
+		double discount = 0;
+		if (totalPriceWithNoPromotion >= 30) {
+			discount = 6;
+		}
+		moneyOff.setDiscount(discount);
+		return moneyOff;
+	}
 }
 
