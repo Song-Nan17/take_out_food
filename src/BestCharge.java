@@ -27,9 +27,9 @@ public class BestCharge {
 	public static void printMenu(Item[] items) {
 		String menu = "============== 菜  单 ==============\n" + "菜品\t\t\t\t\t\t\t价格/元\n";
 		for (Item k : items) {
-			menu += k.getName() + "\t\t\t\t\t\t\t" + String.format("%.2f", k.getPrice());
+			menu += k.getName() + "\t\t\t\t\t\t\t" + String.format("%.2f", k.getPrice())+"\n";
 		}
-		menu += "\n===================================";
+		menu += "===================================";
 		System.out.println(menu);
 		System.out.print("请点餐(输入格式: 菜品*数量，菜品*数量), 输入完成请回车：");
 	}
@@ -163,7 +163,7 @@ public class BestCharge {
 		String bill = "============= 订餐明细 =============\n" + itemsList + "\n" + promotionList;
 		bill += "\n" + "总计：" + String.format("%.2f", totalPrice) + "元";
 		bill += "\n===================================";
-		System.out.println(bill);
+		System.out.println("\n" + bill);
 
 	}
 
@@ -182,7 +182,7 @@ public class BestCharge {
 			promotionList += "\n" + promotion.getType();
 			promotionList += promotion.getType().equals("满30减6元") ? "，" : "(" + String.join("，", promotion.getDiscountItems()) + ")，";
 			promotionList += "省" + String.format("%.2f", promotion.getDiscount()) + "元";
-			promotionList += "\n-----------------------------------";
+			promotionList += "-----------------------------------";
 		}
 		return promotionList;
 	}
