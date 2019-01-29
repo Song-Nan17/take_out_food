@@ -1,18 +1,18 @@
 public class Order {
 	private String id, name;
-	private int quantity;
+	private int count;
 	private double unitPrice, totalPrice;
 
-	Order(String id, String name, int quantity, double unitPrice) {
+	Order(String id, String name, int count, double unitPrice) {
 		this.id = id;
 		this.name = name;
-		this.quantity = quantity;
+		this.count = count;
 		this.unitPrice = unitPrice;
 		this.totalPrice = computeTotalPrice();
 	}
 
 	public double computeTotalPrice() {
-		return quantity * unitPrice;
+		return count * unitPrice;
 	}
 
 	public String getId() {
@@ -23,8 +23,8 @@ public class Order {
 		return name;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getCount() {
+		return count;
 	}
 
 	public double getUnitPrice() {

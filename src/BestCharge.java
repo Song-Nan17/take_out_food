@@ -33,10 +33,7 @@ public class BestCharge {
 //			test
 //			System.out.println(orders.length);
 //			for (Order k : orders) {
-//				if (k == null) {
-//					continue;
-//				}
-//				System.out.println("id:" + k.getId() + ",name:" + k.getName() + ",quantity:" + k.getQuantity() + ", unitPrice:" + k.getUnitPrice() + ", totalPrice:" + k.getTotalPrice());
+//				System.out.println("id:" + k.getId() + ",name:" + k.getName() + ",quantity:" + k.getCount() + ", unitPrice:" + k.getUnitPrice() + ", totalPrice:" + k.getTotalPrice());
 //			}
 		}
 	}
@@ -58,9 +55,9 @@ public class BestCharge {
 			String[] arr = str.split("\\*");
 			String name = arr[0];
 			if (isInItems(name, items)) {
-				int quantity = arr.length > 1 && isInteger(arr[1]) ? Integer.parseInt(arr[1]) : 1;
+				int count = arr.length > 1 && isInteger(arr[1]) ? Integer.parseInt(arr[1]) : 1;
 				try {
-					orders[orderNum] = getOrder(name, quantity, items);
+					orders[orderNum] = getOrder(name, count, items);
 					orderNum++;
 //					System.out.println("orderNum:" + orderNum + ",数组长度：" + orders.length);
 				} catch (ArrayIndexOutOfBoundsException e) {
@@ -88,13 +85,13 @@ public class BestCharge {
 		return isInItems;
 	}
 
-	public static Order getOrder(String name, int quantity, Item[] items) {
-		Order order = new Order("", name, quantity, 0.00);
+	public static Order getOrder(String name, int count, Item[] items) {
+		Order order = new Order("", name, count, 0.00);
 		for (Item item : items) {
 			if (name.equals(item.getName())) {
 				String id = item.getId();
 				double unitPrice = item.getPrice();
-				order = new Order(id, name, quantity, unitPrice);
+				order = new Order(id, name, count, unitPrice);
 				break;
 			}
 		}
