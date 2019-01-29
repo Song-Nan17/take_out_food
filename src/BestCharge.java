@@ -22,15 +22,16 @@ public class BestCharge {
 				System.out.println(k);
 			}
 			if (orders.length == 0) {
-				System.out.println("订单无效");
+				System.out.println("订餐无效，请重新点餐：");
 				continue;
 			}
 			double totalPriceWithNoPromotion = computeTotalPriceWithNoPromotion(orders);
 			Promotion promotion = choosePromotion(orders, totalPriceWithNoPromotion);
 			double totalPrice = computeTotalPrice(totalPriceWithNoPromotion, promotion);
-			System.out.println("总价：" + totalPrice);
-			System.out.println("");
+//			System.out.println("总价：" + totalPrice);
+//			System.out.println("");
 			printBill(orders, promotion, totalPrice);
+			System.out.println("订餐成功！\n可继续点餐：\n");
 //			System.out.println(promotion.getType());
 //			System.out.println(promotion.getDiscount());
 //			System.out.println(totalPriceWithNoPromotion);
@@ -48,7 +49,7 @@ public class BestCharge {
 			menu += k.getName() + "\t\t\t\t\t\t\t" + String.format("%.2f", k.getPrice()) + "\n";
 		}
 		System.out.println(menu);
-		System.out.print("请点单(输入样例: 菜品*数量，菜品*数量), 输入完成请回车：");
+		System.out.print("请点餐(输入格式: 菜品*数量，菜品*数量), 输入完成请回车：");
 	}
 
 	public static Order[] getOrders(String input, Item[] items) {
