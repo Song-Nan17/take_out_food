@@ -25,13 +25,24 @@ public class BestCharge {
 	}
 
 	public static void printMenu(Item[] items) {
-		String menu = "============== 菜  单 ==============\n" + "菜品\t\t\t价格/元\n";
+		int length = 15;
+		String menu = "============== 菜  单 ==============\n";
+		menu += "菜品" + getBlanks(length - "菜单".length()) + "价格/元\n";
 		for (Item k : items) {
-			menu += k.getName() + "\t\t\t" + String.format("%.2f", k.getPrice()) + "\n";
+			String blanks = getBlanks(length - k.getName().length());
+			menu += k.getName() + blanks + String.format("%.2f", k.getPrice()) + "\n";
 		}
 		menu += "===================================";
 		System.out.println(menu);
 		System.out.print("请点餐(输入格式: 菜品*数量，菜品*数量), 输入完成请回车：");
+	}
+
+	public static String getBlanks(int length) {
+		String blanks = "";
+		for (int i = 0; i < length; i++) {
+			blanks += "　";
+		}
+		return blanks;
 	}
 
 	public static Order[] getOrders(String input, Item[] items) {
