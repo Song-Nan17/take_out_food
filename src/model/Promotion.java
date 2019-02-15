@@ -1,6 +1,9 @@
+package model;
+
 public class Promotion {
 	private String type;
-	private String[] items,discountItems;
+	private String[] items;
+	private String[] discountItems;
 	private double discount;
 
 	public Promotion(String type, String[] items) {
@@ -17,14 +20,14 @@ public class Promotion {
 	}
 
 	public void setDiscount(double discount) {
-		this.discount=discount;
+		this.discount = discount;
 	}
 
 	public double getDiscount() {
 		return discount;
 	}
 
-	public void  setDiscountItems(String[] discountItems) {
+	public void setDiscountItems(String[] discountItems) {
 		this.discountItems = discountItems;
 	}
 
